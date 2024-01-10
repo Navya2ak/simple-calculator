@@ -1,0 +1,23 @@
+{
+  "name": "simple-calculator",
+  "version": "1.0.0",
+  "description": "simple calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Navya2ak/simple-calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Navya2ak/simple-calculator/issues"
+  },
+  "homepage": "https://github.com/Navya2ak/simple-calculator#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.2"
+  }
+}
