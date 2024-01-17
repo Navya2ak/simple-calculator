@@ -5,19 +5,62 @@ class Calculator {
     this.clear();
   }
   clear() {
-    this.currentOpTextEle = "";
-    this.prevOpTextEle = "";
+    this.currentOperand = "";
+    this.prevOperand = "";
     this.operation = undefined;
   }
-  delete() {}
-  append(num) {}
+  delete() {
+    this.currentOperand = this.currentOperand.toString().slice(0, -1);
+  }
+  append(num) {
+    if (num === "." && this.currentOperand.includes(".")) return;
+    this.currentOperand = this.currentOperand.toString() + num.toString();
+  }
 
-  chooseOp(op) {}
+  chooseOp(op) {
+    if (this.currentOperand === "") return;
+    if (this.prevOperand !== "") {
+      this.calculate();
+    }
 
-  calculate() {}
+    this.operation = op;
+    this.prevOperand = this.currentOperand;
+    this.currentOperand = "";
+  }
+
+  calculate() {
+    let computation;
+    const prev = parseFloat(this.prevOperand);
+    const current = parseFloat(this.currentOperand);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (this.operation) {
+      case "+":
+        computation = prev + current;
+        break;
+      case "-":
+        computation = prev - current;
+        break;
+      case "*":
+        computation = prev * current;
+        break;
+      case "/":
+        computation = prev / current;
+        break;
+      default:
+        return;
+    }
+    this.currentOperand = computation;
+    this.operation = undefined;
+    this.prevOperand = "";
+  }
 
   displayResult() {
-    this.currentOpTextEle.innerText = this.currentOpTextEle;
+    this.currentOpTextEle.innerText = this.currentOperand;
+    if (this.operation != null) {
+      this.prevOpTextEle.innerText = `${this.prevOperand} ${this.operation}`;
+    } else {
+      this.prevOpTextEle.innerText = "";
+    }
   }
 }
 const numberButton = document.querySelectorAll("[data-num]");
@@ -34,4 +77,22 @@ numberButton.forEach((key) => {
     calculator.append(key.innerText);
     calculator.displayResult();
   });
+});
+operandButton.forEach((key) => {
+  key.addEventListener("click", () => {
+    calculator.chooseOp(key.innerText);
+    calculator.displayResult();
+  });
+});
+eqButton.addEventListener("click", (button) => {
+  calculator.calculate();
+  calculator.displayResult();
+});
+clearButton.addEventListener("click", (button) => {
+  calculator.clear();
+  calculator.displayResult();
+});
+delButton.addEventListener("click", (button) => {
+  calculator.delete();
+  calculator.displayResult();
 });
