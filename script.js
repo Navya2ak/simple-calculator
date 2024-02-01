@@ -33,6 +33,12 @@ class Calculator {
     const prev = parseFloat(this.prevOperand);
     const current = parseFloat(this.currentOperand);
     if (isNaN(prev) || isNaN(current)) return;
+    if (current == 0 && this.operation == "/") {
+      computation = "Cannot be divided by 0"
+      this.currentOperand = computation;
+      this.operation = undefined;
+      this.prevOperand = "";
+    }
     switch (this.operation) {
       case "+":
         computation = prev + current;
@@ -45,6 +51,9 @@ class Calculator {
         break;
       case "/":
         computation = prev / current;
+        break;
+      case "^":
+        computation = Math.pow(prev, current);
         break;
       default:
         return;
