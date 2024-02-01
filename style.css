@@ -47,3 +47,8 @@ body {
   font-size: xx-large;
   color: azure;
 }
+.img1 {
+  height: 100px;
+  margin-left: -8px;
+  background-color: #f0f0f0;
+}
