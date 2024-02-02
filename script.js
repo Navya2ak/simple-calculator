@@ -55,6 +55,9 @@ class Calculator {
       case "^":
         computation = Math.pow(prev, current);
         break;
+      case "√":
+        computation = Math.sqrt(prev, current);
+        break;
       default:
         return;
     }
